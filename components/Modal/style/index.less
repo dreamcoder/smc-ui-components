@@ -1,0 +1,30 @@
+@import '../../style/variable.less';
+// @import 'ant-design-vue/lib/style/index.less';
+@import 'ant-design-vue/lib/modal/style/index.less';
+
+.modal {
+    .@{ant-prefix}-modal-header {
+        border-top-left-radius: @border-radius-base;
+        border-top-right-radius: @border-radius-base;
+        padding: 22px 20px;
+    }
+    .@{ant-prefix}-modal-content {
+        border-radius: @border-radius-base;
+    }
+    .@{ant-prefix}-modal-body,
+    .@{ant-prefix}-modal-footer {
+        padding: 16px 20px;
+    }
+}
+.modalRef {
+    .modal;
+}
+.modalRef-message {
+    .modal;
+    .@{ant-prefix}-modal-content {
+        padding-top: 24px;
+    }
+    .@{ant-prefix}-modal-body {
+        margin: 0 20px 20px;
+    }
+}
