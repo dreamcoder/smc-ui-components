@@ -8,6 +8,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CleanUpStatsPlugin = require('./utils/CleanUpStatsPlugin');
+const { VueLoaderPlugin } = require('vue-loader');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const distFileBaseName = 'antd';
@@ -97,27 +98,19 @@ function getWebpackConfig(modules) {
                                     js: [
                                         {
                                             loader: 'babel-loader',
-                                            options: {
-                                                presets: [
-                                                    resolve(
-                                                        '@babel/preset-env',
-                                                    ),
-                                                ],
-                                                plugins: [
-                                                    [
-                                                        resolve(
-                                                            '@vue/babel-plugin-jsx',
-                                                        ),
-                                                        {
-                                                            mergeProps: false,
-                                                            enableObjectSlots: false,
-                                                        },
-                                                    ],
-                                                    resolve(
-                                                        '@babel/plugin-proposal-object-rest-spread',
-                                                    ),
-                                                ],
-                                            },
+                                            options: babelConfig,
+                                        },
+                                    ],
+                                    ts: [
+                                        {
+                                            loader: 'babel-loader',
+                                            options: babelConfig,
+                                        },
+                                    ],
+                                    tsx: [
+                                        {
+                                            loader: 'babel-loader',
+                                            options: babelConfig,
                                         },
                                     ],
                                 },
@@ -191,6 +184,7 @@ function getWebpackConfig(modules) {
                             options: {
                                 lessOptions: {
                                     javascriptEnabled: true,
+                                    quiet: true, // 抑制 ant-design-vue 等依赖中 mixin 弃用警告
                                 },
                                 sourceMap: true,
                             },
@@ -212,6 +206,7 @@ function getWebpackConfig(modules) {
         },
 
         plugins: [
+            new VueLoaderPlugin(),
             // new BundleAnalyzerPlugin(),
             new CaseSensitivePathsPlugin(),
             new webpack.BannerPlugin(`
