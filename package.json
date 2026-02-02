@@ -1,6 +1,6 @@
 {
   "name": "smc-ui-components",
-  "version": "1.0.23",
+  "version": "1.0.54",
   "main": "lib/index.js",
   "module": "es/index.js",
   "keywords": [
@@ -10,7 +10,7 @@
     "components",
     "ui",
     "framework",
-    "jetLinks",
+    "SMCLOUD",
     "smc-ui"
   ],
   "scripts": {
@@ -25,7 +25,7 @@
     "prettier": "prettier --write",
     "prepare": "husky install",
     "routes": "node site/scripts/genrateRoutes.js",
-    "site": "npm run routes && node --max_old_space_size=8192 ./node_modules/vite/bin/vite.js build site"
+    "site": "yarn predev && yarn routes && node --max_old_space_size=8192 ./node_modules/vite/bin/vite.js build site"
   },
   "files": [
     "lib",
@@ -40,18 +40,18 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dreamcoder/smc-ui-components.git"
+    "url": "git+https://github.com/smc/smc-ui-components.git"
   },
   "bugs": {
-    "url": "https://github.com/dreamcoder/smc-ui-components/issues"
+    "url": "https://github.com/smc/smc-ui-components/issues"
   },
   "dependencies": {
     "@vueuse/core": "^9.12.0",
     "@vueuse/router": "^9.13.0",
-    "ant-design-vue": "^3.2.15",
     "colorpicker-v3": "^2.10.2",
     "lodash-es": "^4.17.21",
-    "monaco-editor": "^0.35.0"
+    "monaco-editor": "^0.40.0",
+    "sortablejs": "^1.15.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -78,11 +78,13 @@
     "@types/eslint": "^8.21.0",
     "@types/lodash-es": "^4.17.6",
     "@types/node": "^18.13.0",
+    "@types/sortablejs": "^1.15.1",
     "@typescript-eslint/eslint-plugin": "^5.50.0",
     "@typescript-eslint/parser": "^5.50.0",
     "@vitejs/plugin-vue": "^2.3.3",
     "@vitejs/plugin-vue-jsx": "^1.3.10",
     "@vue/babel-plugin-jsx": "^1.0.0",
+    "ant-design-vue": "^3.2.15",
     "autoprefixer": "^10.2.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.0",
@@ -122,8 +124,8 @@
     "gulp-typescript": "^6.0.0-alpha.1",
     "husky": "^8.0.3",
     "json5": "^2.2.3",
-    "less": "^4.1.3",
-    "less-loader": "^11.1.0",
+    "less": "^4.0.0",
+    "less-loader": "^10.0.0",
     "less-plugin-npm-import": "^2.1.0",
     "less-vars-to-js": "^1.3.0",
     "lint-staged": "^13.1.0",
@@ -139,6 +141,7 @@
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "object-assign": "^4.1.1",
+    "onigasm": "^2.2.5",
     "postcss": "^8.2.12",
     "postcss-loader": "^6.0.0",
     "prettier": "^2.8.3",

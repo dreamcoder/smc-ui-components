@@ -67,10 +67,10 @@ const listData: DataItem[] = [];
 for (let i = 0; i < 3; i++) {
     listData.push({
         href: 'https://www.antdv.com/',
-        title: `Jetlinks vue part ${i}`,
+        title: `SMCloud vue part ${i}`,
         avatar: 'https://joeschmoe.io/api/v1/random',
         description:
-            'Jetlinks ui component, a design language for background applications, is refined by Ant UED Team.',
+            'SMCloud ui component, a design language for background applications, is refined by Ant UED Team.',
         content:
             'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
     });

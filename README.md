@@ -1,4 +1,4 @@
-# Jetlinks-ui-components
+# SMCloud-ui-components
 
 前端 UI 组件库，采用 [vue3](https://v3.cn.vuejs.org) + [TypeScript](https://www.typescriptlang.org/zh/docs/handbook/2/basic-types.html) + [ant-design-vue](https://www.antdv.com/components/overview-cn) 开发
 

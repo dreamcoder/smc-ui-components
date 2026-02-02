@@ -218,7 +218,7 @@ const matchComponents: IMatcher[] = [
     },
 ];
 
-export interface JetlinksVueResolverOptions {
+export interface SMCloudVueResolverOptions {
     /**
      * exclude components that do not require automatic import
      *
@@ -274,7 +274,7 @@ function getStyleDir(compName: string, _isAntd = false): string {
 
 function getSideEffects(
     compName: string,
-    options: JetlinksVueResolverOptions,
+    options: SMCloudVueResolverOptions,
     _isAntd = false,
 ): any {
     const { importStyle = true, importLess = false } = options;
@@ -438,7 +438,7 @@ const prefix = 'J';
 
 let smcNames: Set<string>;
 
-function genJetlinksNames(primitiveNames: string[]): void {
+function genSMCloudNames(primitiveNames: string[]): void {
     smcNames = new Set(
         primitiveNames.map((name) =>
             filterName.includes(name) ? name : `${prefix}${name}`,
@@ -453,16 +453,16 @@ function genAntdNames(primitiveNames: string[]): void {
 }
 
 genAntdNames(primitiveNames.filter((key) => !filterName.includes(key)));
-genJetlinksNames(primitiveNames);
+genSMCloudNames(primitiveNames);
 
-function isJetlinks(compName: string): boolean {
+function isSMCloud(compName: string): boolean {
     return smcNames.has(compName);
 }
 
 function isAntdv(compName: string): boolean {
     return antdvNames.has(compName);
 }
-function JetlinksVueResolver(options: JetlinksVueResolverOptions = {}): any {
+function SMCloudVueResolver(options: SMCloudVueResolverOptions = {}): any {
     return {
         type: 'component',
         resolve: (name: string) => {
@@ -475,20 +475,20 @@ function JetlinksVueResolver(options: JetlinksVueResolverOptions = {}): any {
                     from: '@ant-design/icons-vue',
                 };
             }
-            const _isJetlinks = isJetlinks(name);
+            const _isSMCloud = isSMCloud(name);
             const _isAntd = isAntdv(name);
-            if ((_isJetlinks || _isAntd) && !options?.exclude?.includes(name)) {
+            if ((_isSMCloud || _isAntd) && !options?.exclude?.includes(name)) {
                 const importName = filterName.includes(name)
                     ? name
                     : name.slice(1);
-                options.packageName = _isJetlinks
+                options.packageName = _isSMCloud
                     ? 'smc-ui-components'
                     : 'ant-design-vue';
                 const path = `${options.packageName}/${
                     options.cjs ? 'lib' : 'es'
                 }`;
                 const stylePath = getSideEffects(importName, options, _isAntd);
-                if (_isJetlinks) {
+                if (_isSMCloud) {
                     console.log(name, importName, stylePath);
                 }
                 return {
@@ -501,4 +501,4 @@ function JetlinksVueResolver(options: JetlinksVueResolverOptions = {}): any {
     };
 }
 
-export default JetlinksVueResolver;
+export default SMCloudVueResolver;

@@ -85,11 +85,11 @@
                         <j-button type="stroke" @click="reset"> 重置 </j-button>
                         <SaveHistory
                             :terms="termsData"
-                            :target="target"
+                            :target="targetStr"
                             :request="request"
                         />
                         <History
-                            :target="target"
+                            :target="targetStr"
                             :request="historyRequest"
                             :delete-request="deleteRequest"
                             :delete-key="deleteKey"
@@ -149,7 +149,7 @@ import SearchItem from '../Item.vue';
 import { typeOptions } from '../setting';
 import { useElementSize } from '@vueuse/core';
 import { useRouteQuery } from '@vueuse/router';
-import { PropType, ref, reactive, watch } from 'vue';
+import { PropType, ref, reactive, watch, computed } from 'vue';
 import SaveHistory from './SaveHistory.vue';
 import History from './History.vue';
 import type {
@@ -236,6 +236,13 @@ const { width } = useElementSize(searchRef);
 
 const q = useRouteQuery('q');
 const target = useRouteQuery('target');
+// useRouteQuery 可能返回 string | string[]，标准化为 string
+const targetStr = computed(
+    () =>
+        ((Array.isArray(target.value) ? target.value[0] : target.value) ??
+            props.target) ||
+        '',
+);
 const hasOnceSearch = ref(false);
 
 // 是否展开更多筛选

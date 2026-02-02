@@ -1,3 +1,3 @@
-import JetlinksVueResolver from './smc';
+import SMCloudVueResolver from './smc';
 
-export { JetlinksVueResolver };
+export { SMCloudVueResolver };

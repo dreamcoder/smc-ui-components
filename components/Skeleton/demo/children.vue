@@ -14,7 +14,7 @@ title: 包含子组件
     <div class="article">
         <j-skeleton :loading="loading">
             <div>
-                <h4>Jetlinks ui component, a design language</h4>
+                <h4>SMCloud ui component, a design language</h4>
                 <p>
                     We supply a series of design principles, practical patterns
                     and high quality design resources (Sketch and Axure), to
