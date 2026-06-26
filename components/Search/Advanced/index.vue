@@ -85,11 +85,11 @@
                         <j-button type="stroke" @click="reset"> 重置 </j-button>
                         <SaveHistory
                             :terms="termsData"
-                            :target="target"
+                            :target="props.target"
                             :request="request"
                         />
                         <History
-                            :target="target"
+                            :target="props.target"
                             :request="historyRequest"
                             :delete-request="deleteRequest"
                             :delete-key="deleteKey"
@@ -148,8 +148,8 @@
 import SearchItem from '../Item.vue';
 import { typeOptions } from '../setting';
 import { useElementSize } from '@vueuse/core';
-import { useRouteQuery } from '@vueuse/router';
-import { PropType, ref, reactive, watch } from 'vue';
+import { computed, PropType, ref, reactive, watch, type WritableComputedRef } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import SaveHistory from './SaveHistory.vue';
 import History from './History.vue';
 import type {
@@ -234,8 +234,33 @@ const searchRef = ref(null);
 const searchRefContentRef = ref(null);
 const { width } = useElementSize(searchRef);
 
-const q = useRouteQuery('q');
-const target = useRouteQuery('target');
+const route = useRoute();
+const router = useRouter();
+
+/** 与 useRouteQuery 等价，直接使用应用内的 vue-router，避免预打包后出现多实例 */
+function createRouteQuery(key: string): WritableComputedRef<string | null> {
+    return computed({
+        get() {
+            const value = route.query[key];
+            if (value === undefined || value === null) {
+                return null;
+            }
+            return Array.isArray(value) ? value[0] ?? null : String(value);
+        },
+        set(val) {
+            const query = { ...route.query };
+            if (val === null || val === undefined || val === '') {
+                delete query[key];
+            } else {
+                query[key] = val;
+            }
+            router.replace({ query });
+        },
+    });
+}
+
+const q = createRouteQuery('q');
+const target = createRouteQuery('target');
 const hasOnceSearch = ref(false);
 
 // 是否展开更多筛选
