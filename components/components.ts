@@ -243,3 +243,18 @@ export type { CollapseProps, CollapsePanelProps } from './Collapse';
 export { default as Collapse, CollapsePanel } from './Collapse';
 
 export { default as ConfigProvider } from './ConfigProvider'
+
+export {
+    DataTable,
+    DataTableTypeSelect,
+    DataTableObject,
+    DataTableArray,
+    DataTableString,
+    DataTableInteger,
+    DataTableDouble,
+    DataTableBoolean,
+    DataTableEnum,
+    DataTableFile,
+    DataTableDate,
+    FULL_CODE,
+} from './DataTable';

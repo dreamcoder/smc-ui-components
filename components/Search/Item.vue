@@ -146,7 +146,7 @@
 <script setup lang="ts" name="SearchItem">
 import { typeOptions, termType, componentType } from './setting';
 import type { PropType } from 'vue';
-import { ref, reactive, watchEffect, nextTick, watch } from 'vue';
+import { ref, reactive, watchEffect, nextTick, watch, markRaw } from 'vue';
 import type { SearchItemData, SearchProps } from './typing';
 import { cloneDeep, isArray, isFunction, omit } from 'lodash-es';
 import {
@@ -335,7 +335,7 @@ const columnChange = (
     // 设置value为undefined
     termsModel.column = value;
     getComponent(item.type); // 处理Item的组件类型
-    componentName.value = item.components;
+    componentName.value = item.components ? markRaw(item.components) : item.components;
 
     // 处理options 以及 request
 
